@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 
-app = Flask(__name__)
+task3 = Flask(__name__)
 
 # List of Books
 books = [
@@ -10,17 +10,17 @@ books = [
 ]
 
 # Home page
-@app.route("/",methods=['GET'])
+@task3.route("/",methods=['GET'])
 def home():
     return 'HOME PAGE'
 
 # List all books
-@app.route("/books",methods=['GET'])
+@task3.route("/books",methods=['GET'])
 def get_books():
     return jsonify(books)
 
 #  Get a book
-@app.route("/books/<int:id>",methods=['GET'])
+@task3.route("/books/<int:id>",methods=['GET'])
 def get_book(id):
     for book in books:
             if book['id'] == id:
@@ -28,18 +28,18 @@ def get_book(id):
     return jsonify({"Error":f"No book found with book id = {id}"})
 
 # Add a book
-@app.route("/books/<int:id>",methods=['GET','POST'])
+@task3.route("/books/<int:id>",methods=['POST'])
 def add_book(id):
     newbook = {
-         "id":request.json['id'],
-         "title":request.json['title'],
-         "author":request.json['author']
+        "id":request.json['id'],
+        "title":request.json['title'],
+        "author":request.json['author']
     }
     books.append(newbook)
     return jsonify({'New Message':'New Book has been added successfully.'})
 
 # Update a book
-@app.route("/books/update/<int:id>",methods=['PUT'])
+@task3.route("/books/<int:id>",methods=['PUT'])
 def update_book(id):
     for book in books:
         if book['id'] == id:
@@ -51,7 +51,7 @@ def update_book(id):
     return jsonify({"Error":f"No book found with book id = {id}"})
 
 # Delete a book
-@app.route("/books/<int:id>",methods=['DELETE'])
+@task3.route("/books/<int:id>",methods=['DELETE'])
 def delete_book(id):
     for book in books:
         if book['id'] == id:
@@ -61,7 +61,5 @@ def delete_book(id):
     return jsonify({"Error":f"No book found with book id = {id}"})
 
     
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    task3.run(debug=True)

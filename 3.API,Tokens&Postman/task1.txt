@@ -1,0 +1,2 @@
+Task 1: Set up Postman and make a GET request to a public API (e.g., JSONPlaceholder).
+"https://jsonplaceholder.typicode.com/post"
